@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="icon" href="https://avatars.mds.yandex.net/i?id=db1e4f21fb4f2e370ef57cc0a79cb4ebd6c97fac-5353994-images-thumbs&n=13" type="image/png">
+    <title>Список дел</title>
+    <meta charset="UTF-8">
+    <style>
+        /* Сброс отступов */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #195D58;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; 
+        }
+
+        .center-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;     
+            justify-content: center; 
+            padding: 20px 0;        
+        }
+
+        .main-content {
+            width: 50%;
+            min-width: 300px;
+            padding: 20px;
+            color: white;    
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;      
+        }
+
+        .input-group {
+            display: flex;
+            width: 100%;  
+            margin: 15px 0 25px 0;
+        }
+
+        .text-el {
+            flex: 1;
+            padding: 10px 15px;
+            outline: none;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 16px;
+            border-right: none;
+        }
+        .text {
+            padding: 10px 15px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+            border: none;
+        }
+
+        .task-list {
+            list-style: none;
+            width: 80%;
+            margin: 0 auto; 
+        }
+
+        .task-item {
+            width: 100%;
+            background-color: #e0e0e0; 
+            
+            margin: 0 auto; 
+        }
+
+        .task-item:hover {
+            background-color: #c0c0c0; 
+        }
+
+        .task-item label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 12px 15px;
+            cursor: pointer;
+            color: #333; 
+        }
+
+        .task-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        .task-text {
+            font-size: 16px;
+        }
+
+        .task-date {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        /* Зачеркивание текста при отмеченном чекбоксе */
+        .task-item input[type="checkbox"]:checked ~ .task-content .task-text {
+            text-decoration: line-through;
+            color: #777;
+        }
+
+        .task-item button {
+            background: none;
+            border: none;
+            font-size: 18px;
+            opacity: 0.6;
+            flex-shrink: 0;
+            padding: 0 5px;
+        }
+
+        .task-item button:hover {
+            opacity: 1;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px 0;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="center-wrapper">
+        <div class="main-content">
+            <h1 style="display: flex; align-items: center; gap: 10px; font-family: 'Courier New', Courier, monospace;">
+                <img src="https://img.freepik.com/premium-vector/jesus-hand-illustration-1-maret-24_9041-1114.jpg?semt=ais_hybrid&w=740" 
+                alt="Иконка" style="height: 40px; width: auto;">
+                Список дел
+            </h1>
+        
+            <div class="input-group">
+                <input class="text-el" type="text" placeholder="Новый элемент списка" />
+                <button class="text" style="background-color: grey;" type="button">Создать</button>
+                <button class="text" style="background-color: red;" type="button">Очистить всё</button>
+            </div>
+            
+            <ul class="task-list">
+                <li class="task-item" data-date="2024-03-15">
+                    <label>
+                        <input type="checkbox" style="display:none">
+                        <span class="task-content">
+                            <span class="task-text">Почесать кошку</span>
+                            <span class="task-date">15.03.2024</span>
+                        </span>
+                        <div class="close"><button type="button">&#10006;</button></div>
+                        
+                    </label>
+                </li>
+                <li class="task-item" data-date="2024-03-14">
+                    <label>
+                        <input type="checkbox" style="display:none">
+                        <span class="task-content">
+                            <span class="task-text">Полить картошку</span>
+                            <span class="task-date">14.03.2024</span>
+                        </span>
+                        <div class="close"><button type="button">&#10006;</button></div>
+                    </label>
+                </li>
+                <li class="task-item" data-date="2024-03-12">
+                    <label>
+                        <input type="checkbox" style="display:none">
+                        <span class="task-content">
+                            <span class="task-text">Сложить в лукошко</span>
+                            <span class="task-date">12.03.2024</span>
+                        </span>
+                        <div class="close"><button type="button">&#10006;</button></div>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <hr>
+    <div class="footer">
+        Copyright ©
+    </div>
+</body>
+</html>
