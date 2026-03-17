@@ -1,0 +1,247 @@
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Работы</title>
+    <style>
+        /* Сброс */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background-color: white; 
+            line-height: 1.5;
+            color: #222;
+        }
+        .top-bar {
+            background-color: #9b9b9b; 
+            width: 100%;
+            padding: 16px 0;
+        }
+        
+        .full-width-gray {
+            background-color: #929292; 
+            width: 100%;
+            padding: 40px 0; 
+        }
+
+        .center-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            gap: 32px;
+            padding: 0 24px;
+        }
+
+        .center-wrapper a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .image-block {
+            background-color: #f0f0f0; 
+            width: 100%;
+            padding: 48px 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-placeholder {
+            max-width: 960px;
+            width: 100%;
+            background-color: #b0bec5; 
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            aspect-ratio: 16 / 9; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2c3e50;
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background-image: linear-gradient(135deg, #9aa9b7 0%, #cdd9e5 100%);
+        }
+
+        .green-block {
+            background-color: #2e7d32;
+            width: 100%;
+            height: 50vh;       
+            padding: 40px 24px;
+            margin: 30px 0;
+            border-radius: 8px;
+            
+            display: flex;
+            align-items: center;   
+            justify-content: center; 
+        }
+
+        .green-items {
+            display: flex;
+            justify-content: center;  
+            align-items: center;
+            gap: 60px;  
+            flex-wrap: wrap; 
+        }
+
+        .green-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;  
+            gap: 15px;
+            color: white;
+        }
+
+        .green-item span {
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+
+        .big-gray-block {
+            background-color: #e9eef2; 
+            width: 100%;
+            padding: 60px 24px;
+        }
+
+        .cards-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .white-card {
+            background-color: white;
+            border-radius: 24px;
+            padding: 32px 24px;
+            flex: 1 1 260px; /* три в ряд, минимальная ширина 260px, дальше перенос */
+            max-width: 320px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05), 0 4px 8px rgba(0,0,0,0.03);
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+
+        .white-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 16px;
+            color: #1f3a3f;
+        }
+
+        .white-card p {
+            color: #3f4a51;
+            margin-bottom: 20px;
+        }
+
+        .white-card .badge {
+            display: inline-block;
+            background-color: #2e7d32;
+            color: white;
+            padding: 6px 20px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .badge:hover {
+            background-color: #153817;
+        }
+
+        .footer {
+            background-color: orange; /* можно чуть темнее, чем большие блоки, для отделения */
+            width: 100%;
+            padding: 28px 16px;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #2b3b44;
+            border-top: 1px solid #b6c3cb;
+        }
+
+        section {
+            width: 100%;
+        }
+
+        .annotation {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="center-wrapper">
+            <a href="#Centry">Главная</a>
+            <a href="#What">Че мы делаем?</a>
+            <a href="#Footer">Футер</a>
+        </div>
+    </div>
+
+    <div class="image-block" id="Centry">
+        <div class="image-placeholder">
+            <h3>Разработка проекта ландшафтной организации участка со скидкой 50%</h3>
+        </div>
+    </div>
+
+    <div class="green-block">
+        <div class="green-items">
+                    <div class="green-item">
+                        <h3>Ландштное проектирование</h3>
+                        <p>Здесь может быть текст.</p>
+                    </div>
+                    <div class="green-item">
+                        <h3>Благоустройство и озеленение</h3>
+                        <p>Здесь может быть текст.</p>
+                    </div>
+                    <div class="green-item"> 
+                        <h3>Автоматический полив</h3>
+                        <p>Здесь может быть текст.</p>
+                    </div>
+                </div>
+
+    </div>
+
+    <div class="big-gray-block" id="What">
+        <div class="cards-container">
+            <div class="white-card">
+                <h3>Ландшафты для дачи</h3>
+                <p>Описание наших профессионалов. Здесь может быть текст.</p>
+                <button class="badge" type="button">Заказать</button>
+            </div>
+            <div class="white-card">
+                <h3>Посадка крупномеров</h3>
+                <p>Наши деревья очень хорошие</p>
+                <button class="badge" type="button">Заказать</button>
+            </div>
+            <div class="white-card">
+                <h3>Пруды, водоемы, мосты</h3>
+                <p>Вода - это жизнь. Кажется, это причина купить себе пруд</p>
+                <button class="badge" type="button">Заказать</button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="footer" id="Footer">
+        Copyright © 2026 — Все права защищены
+    </div>
+
+</body>
+</html>
