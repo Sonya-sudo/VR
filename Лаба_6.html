@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Задачи</title>
+</head>
+<body>
+
+<h1>Задача 1: работа с числами</h1>
+
+<h2>1.1. Вернуть число в обратном порядке</h2>
+<p>123 → 321</p>
+<p><strong>Результат:</strong> <span id="reverseResult"></span></p>
+
+<h2>1.2. Вернуть число без повторяющихся цифр</h2>
+<p>111333456 → 13456</p>
+<p><strong>Результат:</strong> <span id="uniqueDigitsResult"></span></p>
+
+<h2>1.3. Посчитать, сколько раз в данном числе встречается данная цифра</h2>
+<p>Число: 1355567, цифра: 5 → 3 раза</p>
+<p><strong>Результат:</strong> <span id="countDigitResult"></span></p>
+
+<h2>1.4. Самая длинная последовательность нулей или единиц в двоичной записи числа</h2>
+<p>Пример: число 123 (двоичная: 1111011) → самая длинная последовательность единиц = 4</p>
+<p><strong>Результат:</strong> <span id="longestSequenceResult"></span></p>
+
+<hr>
+
+<h1>Задача 2: работа со строками</h1>
+
+<h2>2.1. Найти самый первый неповторяющийся символ в строке</h2>
+<p>'фывфавыапрс' → 'п'</p>
+<p><strong>Результат:</strong> <span id="firstUniqueResult"></span></p>
+
+<h2>2.2. Сгенерировать строку заданной длины из случайных символов (английские буквы + цифры)</h2>
+<p>Длина 5 → например: '2fvg6'</p>
+<p><strong>Результат:</strong> <span id="randomStringResult"></span></p>
+
+<h2>2.3. Вернуть только уникальные символы строки</h2>
+<p>'позволяеткопироватьтекстиз' → 'позвляеткираьс'</p>
+<p><strong>Результат:</strong> <span id="uniqueCharsResult"></span></p>
+
+<hr>
+
+<script>
+    // Вернуть число в обратном порядке 123 -> 321
+    function reverseNumber(num) {
+        let str = num.toString();
+        let reversedStr = str.split('').reverse().join('');
+        return parseInt(reversedStr, 10);
+    }
+    let reverseExample = reverseNumber(123);
+    document.getElementById('reverseResult').innerText = reverseExample;
+
+    // Вернуть число без повторяющихся цифр 111333456 -> 13456
+    function removeDuplicateDigits(num) {
+        let str = num.toString();
+        let seen = {};
+        let result = '';
+        for (let i = 0; i < str.length; i++) {
+            let digit = str[i];
+            if (!seen[digit]) {
+                seen[digit] = true;
+                result += digit;
+            }
+        }
+        return parseInt(result, 10);
+    }
+    let uniqueDigitsExample = removeDuplicateDigits(111333456);
+    document.getElementById('uniqueDigitsResult').innerText = uniqueDigitsExample;
+
+    // Посчитать, сколько раз в данном числе встречается данная цифра (1355567, 5) -> 3
+    function countDigitOccurrences(num, digit) {
+        let str = num.toString();
+        let count = 0;
+        let targetDigit = digit.toString();
+        for (let i = 0; i < str.length; i++) {
+            if (str[i] === targetDigit) {
+                count++;
+            }
+        }
+        return count;
+    }
+    let countExample = countDigitOccurrences(1355567, 5);
+    document.getElementById('countDigitResult').innerText = countExample;
+
+    // Самая длинная последовательность нулей или единиц в двоичной записи числа
+    function longestConsecutiveBits(num) {
+        let binary = num.toString(2);
+        let maxOnes = 0;
+        let maxZeros = 0;
+        let currentOnes = 0;
+        let currentZeros = 0;
+        
+        for (let i = 0; i < binary.length; i++) {
+            if (binary[i] === '1') {
+                currentOnes++;
+                currentZeros = 0;
+                if (currentOnes > maxOnes) maxOnes = currentOnes;
+            } else { // '0'
+                currentZeros++;
+                currentOnes = 0;
+                if (currentZeros > maxZeros) maxZeros = currentZeros;
+            }
+        }
+        return Math.max(maxOnes, maxZeros);
+    }
+    // Пример для числа 123: 1111011 -> самая длинная последовательность единиц = 4
+    let longestSeqExample = longestConsecutiveBits(123);
+    document.getElementById('longestSequenceResult').innerHTML = `Для числа 123 (двоичная: ${123..toString(2)}) → ${longestSeqExample}`;
+
+    // Найти самый первый неповторяющийся символ в строке: 'фывфавыапрс' -> 'п'
+    function firstUniqueChar(str) {
+        let charCount = {};
+        for (let i = 0; i < str.length; i++) {
+            let ch = str[i];
+            charCount[ch] = (charCount[ch] || 0) + 1;
+        }
+        for (let i = 0; i < str.length; i++) {
+            if (charCount[str[i]] === 1) {
+                return str[i];
+            }
+        }
+        return null; 
+    }
+    let firstUniqueExample = firstUniqueChar('фывфавыапрс');
+    document.getElementById('firstUniqueResult').innerText = firstUniqueExample;
+
+    // Сгенерировать строку заданной длины из случайных символов (английские буквы + цифры)
+    function generateRandomString(length) {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            let randomIndex = Math.floor(Math.random() * chars.length);
+            result += chars[randomIndex];
+        }
+        return result;
+    }
+    let randomStringExample = generateRandomString(5);
+    document.getElementById('randomStringResult').innerHTML = `Длина 5 → '${randomStringExample}' (при каждом обновлении страницы генерируется новая строка)`;
+
+    // Вернуть только уникальные символы строки: 'позволяеткопироватьтекстиз' -> 'позвляеткираьс'
+    function getUniqueChars(str) {
+        let seen = {};
+        let result = '';
+        for (let i = 0; i < str.length; i++) {
+            let ch = str[i];
+            if (!seen[ch]) {
+                seen[ch] = true;
+                result += ch;
+            }
+        }
+        return result;
+    }
+    let uniqueCharsExample = getUniqueChars('позволяеткопироватьтекстиз');
+    document.getElementById('uniqueCharsResult').innerText = uniqueCharsExample;
+</script>
+
+</body>
+</html>

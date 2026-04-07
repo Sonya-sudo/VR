@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Задачи</title>
+</head>
+<body>
+
+<h2>Задание 1</h2>
+<pre>
+let name = "Джон";
+let admin = name;
+alert(admin);
+</pre>
+<hr>
+
+<h2>Задание 2</h2>
+<pre>
+let a = Number(prompt("Первое число?", 1));
+let b = Number(prompt("Второе число?", 2));
+alert(a + b);
+</pre>
+<hr>
+
+<h2>Задание 3</h2>
+<p>При помощи цикла for вывести чётные числа от 2 до 10.</p>
+<pre>
+for (let i = 2; i <= 10; i += 2) {
+    document.write(i + " ");
+}
+</pre>
+<p><strong>Результат:</strong> <span id="task3Result"></span></p>
+<hr>
+
+<h2>Задание 4</h2>
+<p>Переписать цикл for на while (вывод alert: number 0!, number 1!, number 2!).</p>
+<pre>
+let i = 0;
+while (i < 3) {
+    alert(`number ${i}!`);
+    i++;
+}
+</pre>
+<hr>
+
+<h2>Задание 5</h2>
+<pre>
+let num;
+while (true) {
+    num = prompt("Введите число больше 100", "");
+    if (num === null || +num > 100) break;
+}
+</pre>
+<hr>
+
+<h2>Задание 6</h2>
+<pre>
+function isPrime(num) {
+    if (num < 2) return false;
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+        if (num % i === 0) return false;
+    }
+    return true;
+}
+let n = 10;
+let primes = [];
+for (let i = 2; i <= n; i++) {
+    if (isPrime(i)) primes.push(i);
+}
+document.write("Простые числа: " + primes.join(", "));
+</pre>
+<p><strong>Результат:</strong> <span id="task6Result"></span></p>
+<hr>
+
+<script>
+    // ЗАДАНИЕ 1: переменные admin и name
+    let name = "Джон";
+    let admin = name;
+    alert("Задание 1: " + admin);  // должно показать "Джон". не показал. говнюк.
+
+    // ЗАДАНИЕ 2: исправленное сложение (преобразование в числа)
+    let a = Number(prompt("Задание 2. Первое число?", "1"));
+    let b = Number(prompt("Задание 2. Второе число?", "2"));
+    alert("Задание 2. Сумма: " + (a + b));  
+
+    // ЗАДАНИЕ 3: чётные числа от 2 до 10 
+    let evenNumbers = [];
+    for (let i = 2; i <= 10; i++) {
+        if (i % 2 === 0) {
+            evenNumbers.push(i);
+        }
+    }
+    document.getElementById("task3Result").innerText = evenNumbers.join(", ");
+
+    // ЗАДАНИЕ 4: замена for на while (три alert)
+    let i = 0;
+    while (i < 3) {
+        alert(`Задание 4: number ${i}!`);
+        i++;
+    }
+
+    // ЗАДАНИЕ 5: повторять ввод, пока число не больше 100 или отмена
+    let userInput;
+    while (true) {
+        userInput = prompt("Задание 5. Введите число больше 100:", "");
+        if (userInput === null) {
+            alert("Вы нажали Отмена. Цикл завершён.");
+            break;
+        }
+        let number = Number(userInput);
+        if (isNaN(number)) {
+            alert("Это не число. Попробуйте ещё раз.");
+            continue;
+        }
+        if (number > 100) {
+            alert(`Число ${number} больше 100. Выход из цикла.`);
+            break;
+        } else {
+            alert(`Число ${number} НЕ больше 100. Попробуйте ещё раз.`);
+        }
+    }
+
+    // ЗАДАНИЕ 6: простые числа от 2 до n 
+    function isPrime(num) {
+        if (num < 2) return false;
+        if (num === 2) return true;
+        if (num % 2 === 0) return false;
+        let limit = Math.sqrt(num);
+        for (let d = 3; d <= limit; d += 2) {
+            if (num % d === 0) return false;
+        }
+        return true;
+    }
+
+    let n = 10;
+    let primes = [];
+    for (let i = 2; i <= n; i++) {
+        if (isPrime(i)) {
+            primes.push(i);
+        }
+    }
+    document.getElementById("task6Result").innerText = primes.join(", ");
+
+</script>
+</body>
+</html>
