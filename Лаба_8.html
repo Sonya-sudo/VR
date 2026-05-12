@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f1f5f9;
+            margin: 0;
+            padding: 2rem;
+            color: #0f172a;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #0f172a;
+            border-left: 6px solid #3b82f6;
+            padding-left: 1rem;
+        }
+        .card {
+            background: white;
+            border-radius: 1.2rem;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02);
+            margin-bottom: 2rem;
+            padding: 1.5rem 2rem;
+            transition: box-shadow 0.2s;
+            border: 1px solid #e2e8f0;
+        }
+        .card:hover {
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+        }
+        .card h2 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+        .col {
+            flex: 1;
+            min-width: 240px;
+        }
+        .control-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+            color: #334155;
+        }
+        input, button {
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.6rem;
+            border: 1px solid #cbd5e1;
+            font-size: 0.95rem;
+            transition: 0.2s;
+        }
+        input {
+            background: #f8fafc;
+            width: 180px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
+        }
+        button {
+            background: #f1f5f9;
+            cursor: pointer;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #cbd5e1;
+        }
+        button.primary {
+            background: #3b82f6;
+            border-color: #3b82f6;
+            color: white;
+        }
+        button.primary:hover {
+            background: #2563eb;
+        }
+        button.warning {
+            background: #f59e0b;
+            border-color: #f59e0b;
+            color: white;
+        }
+        button.danger {
+            background: #ef4444;
+            border-color: #ef4444;
+            color: white;
+        }
+        button.secondary {
+            background: #64748b;
+            color: white;
+            border-color: #64748b;
+        }
+        button:hover {
+            filter: brightness(0.96);
+            transform: translateY(-1px);
+        }
+        .output-box {
+            background: #f8fafc;
+            border-radius: 0.8rem;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            border-left: 4px solid #3b82f6;
+            word-break: break-word;
+            white-space: pre-wrap;
+            color: #0f172a;
+        }
+        .output-label {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: #475569;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        hr {
+            margin: 1rem 0;
+            border: 0;
+            height: 1px;
+            background: #e2e8f0;
+        }
+        .flex-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            align-items: center;
+        }
+        .counter-value {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: monospace;
+            background: #eef2ff;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        @media (max-width: 800px) {
+            body { padding: 1rem; }
+            .card { padding: 1rem; }
+            .row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ================= ЗАДАЧА 1 (ТАЙМЕРЫ) ================= -->
+    <div class="card">
+        <h2><span> Задача 1 — Таймеры</span></h2>
+        <div class="row">
+            <div class="col">
+                <div class="control-group">
+                    <label> Число N :</label>
+                    <input type="number" id="timerN" value="5" step="1" min="0">
+                </div>
+                <button id="runSimpleCounter" class="primary"> counter(n) (консоль + вывод)</button>
+                <div class="output-box" id="simpleCounterOutput">
+                    <div class="output-label"> Результат counter(n):</div>
+                    <span id="simpleCounterDisplay">—</span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="control-group">
+                    <label> createCounter(n) — управляемый счётчик</label>
+                    <div class="flex-buttons">
+                        <button id="ccStart" class="primary"> Start</button>
+                        <button id="ccPause" class="warning"> Pause</button>
+                        <button id="ccStop" class="danger"> Stop</button>
+                        <button id="ccReset" class="secondary"> Сброс (stop)</button>
+                    </div>
+                </div>
+                <div class="output-box" id="ccDisplayArea">
+                    <div class="output-label">Текущее значение:</div>
+                    <div class="counter-value" id="ccValue">—</div>
+                </div>
+                <div class="output-box" id="ccLog" style="font-size:0.85rem; max-height:100px; overflow-y:auto;">
+                    <div class="output-label">Лог (секундные тики):</div>
+                    <div id="ccLogContent">ожидание запуска...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= ЗАДАЧА 2 (ПРОМИСЫ) ================= -->
+    <div class="card">
+        <h2><span> Задача 2 — Промисы</span></h2>
+        <div class="row">
+            <div class="col">
+                <h3> Счётчик через delay(N)</h3>
+                <label>N (секунд от N до 0):</label>
+                <input type="number" id="delayCounterN" value="4" step="1" min="0">
+                <button id="runDelayCounter" class="primary"> Запустить delay-счётчик</button>
+                <div class="output-box" id="delayOutput">
+                    <div class="output-label"> Последовательность:</div>
+                    <div id="delaySequence">—</div>
+                </div>
+            </div>
+            <div class="col">
+                <h3> Первый репозиторий GitHub</h3>
+                <label> Имя пользователя:</label>
+                <input type="text" id="githubUsername" placeholder="octocat" value="octocat">
+                <button id="getFirstRepoBtn" class="primary"> Получить название первого репозитория</button>
+                <div class="output-box" id="repoOutput">
+                    <div class="output-label"> Результат:</div>
+                    <div id="repoName">—</div>
+                </div>
+                <div class="output-box" id="repoError" style="border-left-color:#ef4444; display:none;">
+                    <div class="output-label"> Ошибка</div>
+                    <div id="repoErrorMessage"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= ЗАДАЧА 3 (ASYNC/AWAIT + рекурсия -> цикл) ================= -->
+    <div class="card">
+        <h2><span> Задача 3 — async/await + цикл (getGithubUser)</span></h2>
+        <div class="row">
+            <div class="col">
+                <label> Логин GitHub (проверка):</label>
+                <input type="text" id="asyncUsername" placeholder="iliakan" value="iliakan">
+                <button id="runAsyncGetUser" class="primary">Получить данные пользователя</button>
+                <div class="output-box" id="asyncUserOutput">
+                    <div class="output-label"> Результат (полное имя):</div>
+                    <div id="asyncUserName">—</div>
+                </div>
+                <div class="output-box" id="asyncErrorBox" style="border-left-color:#ef4444; display:none;">
+                    <div class="output-label"> Ошибка</div>
+                    <div id="asyncErrorMsg"></div>
+                </div>
+                <p style="font-size:0.75rem; color:#475569; margin-top:10px;"> Функция будет повторять запрос, пока не получит существующего пользователя (с помощью цикла, а не рекурсии). Если логин неверный — попросит ввести заново через поле ввода (без prompt).</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 1.1 counter(n) — простой вывод раз в секунду в консоль + на страницу
+    let simpleInterval = null;
+    const simpleCounterDisplay = document.getElementById('simpleCounterDisplay');
+    function counter(n) {
+        if (simpleInterval) clearInterval(simpleInterval);
+        let current = n;
+        simpleCounterDisplay.innerText = current;
+        console.log(`counter: ${current}`);
+        simpleInterval = setInterval(() => {
+            if (current <= 0) {
+                clearInterval(simpleInterval);
+                simpleInterval = null;
+                console.log("counter остановлен (0)");
+                return;
+            }
+            current--;
+            simpleCounterDisplay.innerText = current;
+            console.log(`counter: ${current}`);
+        }, 1000);
+    }
+
+    document.getElementById('runSimpleCounter').addEventListener('click', () => {
+        const n = parseInt(document.getElementById('timerN').value, 10);
+        if (isNaN(n) || n < 0) {
+            simpleCounterDisplay.innerText = "Ошибка: введите неотрицательное число";
+            return;
+        }
+        if (simpleInterval) clearInterval(simpleInterval);
+        counter(n);
+    });
+
+    // 1.2 createCounter(n) — объект с start/pause/stop (сброс)
+    function createCounter(initialN) {
+        let current = initialN;
+        let intervalId = null;
+        let isActive = false;
+
+        const listeners = []; // для UI обновления
+
+        function notify() {
+            listeners.forEach(fn => fn(current));
+        }
+
+        function tick() {
+            if (!isActive) return;
+            if (current <= 0) {
+                stop(); // достигли нуля, останавливаем
+                notify();
+                return;
+            }
+            current--;
+            notify();
+        }
+
+        function start() {
+            if (intervalId) clearInterval(intervalId);
+            if (current <= 0) {
+                // если уже ноль, не запускаем
+                isActive = false;
+                notify();
+                return;
+            }
+            isActive = true;
+            intervalId = setInterval(() => tick(), 1000);
+            notify();
+        }
+
+        function pause() {
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
+            }
+            isActive = false;
+            notify();
+        }
+
+        function stop() {
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
+            }
+            isActive = false;
+            current = initialN;   
+            notify();
+        }
+
+        function setValue(value) {
+            current = value;
+            notify();
+        }
+
+        function getValue() {
+            return current;
+        }
+
+        return { start, pause, stop, onUpdate: (fn) => listeners.push(fn), setValue, getValue };
+    }
+
+    let myCounter = null;
+    const ccValueSpan = document.getElementById('ccValue');
+    const ccLogContent = document.getElementById('ccLogContent');
+
+    function updateCCUI(value) {
+        ccValueSpan.innerText = value;
+        const now = new Date().toLocaleTimeString();
+        ccLogContent.innerHTML = `[${now}] значение: ${value}<br>` + ccLogContent.innerHTML;
+        if (ccLogContent.children.length > 8) {
+            const lines = ccLogContent.innerHTML.split('<br>');
+            if (lines.length > 12) ccLogContent.innerHTML = lines.slice(0, 12).join('<br>');
+        }
+    }
+
+    function resetAndRecreateCounter() {
+        const n = parseInt(document.getElementById('timerN').value, 10);
+        if (isNaN(n)) return;
+        if (myCounter) myCounter.stop();
+        myCounter = createCounter(n);
+        myCounter.onUpdate(updateCCUI);
+        updateCCUI(n);
+        ccLogContent.innerHTML = `счётчик создан с N = ${n}<br>`;
+    }
+
+    document.getElementById('ccStart').addEventListener('click', () => {
+        if (!myCounter) resetAndRecreateCounter();
+        myCounter.start();
+    });
+    document.getElementById('ccPause').addEventListener('click', () => {
+        if (myCounter) myCounter.pause();
+    });
+    document.getElementById('ccStop').addEventListener('click', () => {
+        if (myCounter) myCounter.stop();
+        const n = parseInt(document.getElementById('timerN').value, 10);
+        if (!isNaN(n)) updateCCUI(n);
+    });
+    document.getElementById('ccReset').addEventListener('click', () => {
+        if (myCounter) myCounter.stop();
+        resetAndRecreateCounter();
+    });
+    resetAndRecreateCounter();
+
+    // 2.1 delay(N) промис + счётчик с использованием delay
+    function delay(seconds) {
+        return new Promise(resolve => setTimeout(resolve, seconds * 1000));
+    }
+
+    async function runDelayCounter(N) {
+        const outputDiv = document.getElementById('delaySequence');
+        outputDiv.innerText = "запуск...";
+        let current = N;
+        const results = [];
+        while (current >= 0) {
+            results.push(current);
+            outputDiv.innerText = results.join(' → ');
+            if (current === 0) break;
+            await delay(1);
+            current--;
+        }
+        outputDiv.innerText = results.join(' → ') + "  ✅ Готово!";
+    }
+
+    document.getElementById('runDelayCounter').addEventListener('click', () => {
+        const nVal = parseInt(document.getElementById('delayCounterN').value, 10);
+        if (isNaN(nVal) || nVal < 0) {
+            document.getElementById('delaySequence').innerText = "Введите корректное N >= 0";
+            return;
+        }
+        runDelayCounter(nVal);
+    });
+
+    // 2.2 Получить название первого репозитория пользователя (через промисы)
+    function fetchJson(url) {
+        return fetch(url).then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            return response.json();
+        });
+    }
+
+    function getFirstRepoName(username) {
+        return fetchJson(`https://api.github.com/users/${username}/repos`)
+            .then(repos => {
+                if (!repos || repos.length === 0) {
+                    throw new Error(`У пользователя ${username} нет публичных репозиториев.`);
+                }
+                return repos[0].name;
+            });
+    }
+
+    const repoBtn = document.getElementById('getFirstRepoBtn');
+    const repoNameSpan = document.getElementById('repoName');
+    const repoErrorDiv = document.getElementById('repoError');
+    const repoErrorMessageSpan = document.getElementById('repoErrorMessage');
+
+    repoBtn.addEventListener('click', () => {
+        const username = document.getElementById('githubUsername').value.trim();
+        if (!username) {
+            repoNameSpan.innerText = "Укажите имя пользователя";
+            return;
+        }
+        repoNameSpan.innerText = "⏳ Загрузка...";
+        repoErrorDiv.style.display = 'none';
+        getFirstRepoName(username)
+            .then(repoName => {
+                repoNameSpan.innerText = `📁 ${repoName}`;
+            })
+            .catch(err => {
+                repoErrorDiv.style.display = 'block';
+                repoErrorMessageSpan.innerText = err.message;
+                repoNameSpan.innerText = "Ошибка";
+                console.error(err);
+            });
+    });
+
+    // 3. async/await версия getGithubUser (рекурсия -> цикл)
+    class HttpError extends Error {
+        constructor(response) {
+            super(`${response.status} for ${response.url}`);
+            this.name = 'HttpError';
+            this.response = response;
+        }
+    }
+
+    async function loadJson(url) {
+        const response = await fetch(url);
+        if (response.status === 200) {
+            return await response.json();
+        } else {
+            throw new HttpError(response);
+        }
+    }
+
+    async function getGithubUserWithRetry(login) {
+        let currentLogin = login;
+        while (true) {
+            try {
+                const user = await loadJson(`https://api.github.com/users/${currentLogin}`);
+                return user; 
+            } catch (err) {
+                if (err instanceof HttpError && err.response.status === 404) {
+                    throw new Error(`Пользователь "${currentLogin}" не найден (404). Пожалуйста, введите другой логин и повторите запрос.`);
+                } else {
+                    throw err; 
+                }
+            }
+        }
+    }
+
+    async function fetchUserWithLoop() {
+        const inputElement = document.getElementById('asyncUsername');
+        let login = inputElement.value.trim();
+        if (!login) {
+            document.getElementById('asyncUserName').innerText = "Введите логин";
+            return;
+        }
+        const outputSpan = document.getElementById('asyncUserName');
+        const errorBox = document.getElementById('asyncErrorBox');
+        const errorMsgSpan = document.getElementById('asyncErrorMsg');
+        errorBox.style.display = 'none';
+        outputSpan.innerText = "⏳ Загрузка...";
+
+        let attempts = 0;
+        let currentLogin = login;
+        while (true) {
+            attempts++;
+            try {
+                const user = await loadJson(`https://api.github.com/users/${currentLogin}`);
+                outputSpan.innerText = `✅ Полное имя: ${user.name || 'не указано'} (логин: ${user.login})`;
+                inputElement.value = currentLogin;
+                break;
+            } catch (err) {
+                let is404 = false;
+                if (err instanceof HttpError && err.response.status === 404) {
+                    is404 = true;
+                }
+                if (is404) {
+                    errorBox.style.display = 'block';
+                    errorMsgSpan.innerText = `❌ Пользователь "${currentLogin}" не существует. Введите другой логин и нажмите кнопку ещё раз.`;
+                    outputSpan.innerText = "Ошибка: пользователь не найден";
+                    return; 
+                } else {
+                    errorBox.style.display = 'block';
+                    errorMsgSpan.innerText = `Ошибка: ${err.message}`;
+                    outputSpan.innerText = "Сетевая/серверная ошибка";
+                    return;
+                }
+            }
+        }
+    }
+
+    document.getElementById('runAsyncGetUser').addEventListener('click', fetchUserWithLoop);
+
+</script>
+</body>
+</html>
